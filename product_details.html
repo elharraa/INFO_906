@@ -28,6 +28,104 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
+	
+	
+	
+	<script type="text/javascript">
+var FOCUS = 0;
+var PT_DIMS = 0;
+var PT_COULEURS = 0;
+var PT_BOIS = 0;
+var PRIX = 300;
+document.onkeydown = function (event)
+{
+  //var dirs = ['West','North', 'East', 'South'];
+  //West = 37, North = 38, East = 39, South=40
+  
+  var dims = ['Par défaut','019x728','1981x198', '1091x109', '10918x6528'];
+  var couleurs = ['Par défaut','Blanc', 'Noir', 'Cramoisi', 'Pourpre', 'Taupe', 'Saumon'];
+  var bois = ['Par défaut','Hêtre', 'Chêne', 'Sapin'];
+  
+  event = event || window.event; //Fix pour IE
+  var code = event.keyCode || event.which; //code ascii de la touche
+  
+  //W = 87 (haut), A = 65 (gauche), S = 83 (bas), D = 68 (droite), F = 70
+  if( code == 81 ) 
+  {
+  	if( FOCUS == 0 && PT_DIMS > 0 )
+  	{
+  		-- PT_DIMS;
+  		PRIX -= 50;
+  		document.getElementById("dims").innerHTML = dims[PT_DIMS];
+  	}
+  	else if ( FOCUS == 1 && PT_COULEURS > 0 )
+  	{
+  		-- PT_COULEURS;
+  		if ( PT_COULEURS == 0 )
+  		{
+  			PRIX -= 20;
+  		}
+  		document.getElementById("couleurs").innerHTML = couleurs[PT_COULEURS];
+  	}
+  	else if ( FOCUS == 2 && PT_BOIS > 0 )
+  	{
+  		PRIX -= 25 * PT_BOIS;
+  		-- PT_BOIS;
+  		document.getElementById("bois").innerHTML = bois[PT_BOIS];
+  	}
+  }
+  else if (code == 84 )
+  {
+  	if( FOCUS == 0 && PT_DIMS < dims.length-1 )
+  	{
+  		++ PT_DIMS;
+  		PRIX += 50;
+  		document.getElementById("dims").innerHTML = dims[PT_DIMS];
+  	}
+  	else if ( FOCUS == 1 && PT_COULEURS < couleurs.length-1 )
+  	{
+  		++ PT_COULEURS;
+  		if ( PT_COULEURS == 1 )
+  		{
+  			PRIX += 20;
+  		}
+  		document.getElementById("couleurs").innerHTML = couleurs[PT_COULEURS];
+  	}
+  	else if ( FOCUS == 2 && PT_BOIS < bois.length-1 )
+  	{
+  		++ PT_BOIS;
+  		PRIX += 25 * PT_BOIS;
+  		document.getElementById("bois").innerHTML = bois[PT_BOIS];
+  	}
+  }
+   else if (code == 186 && FOCUS > 0)
+  {
+  	-- FOCUS;
+  }
+   else if (code == 83 && FOCUS < 2)
+  {
+  	++ FOCUS;
+  }
+  else if (code == 32)
+  {
+  	
+  }
+  document.getElementById("price").innerHTML = PRIX + "€";
+  //console.log(code);
+  
+  /*if( code >= 37 && code <= 40) 
+  {
+    alert(dirs[code - 37]);
+  }*/
+ 
+};
+/*document.onclick = function (event)
+{
+  alert("Votre commande a été envoyée. Merci de le présenter à la caisse pour le règlement et donner l'adresse de livraison.");
+};*/
+</script>
+	
+	
   </head>
 <body>
 <div id="header">
@@ -44,7 +142,7 @@
     <a class="brand" href="index.html"><img src="themes/images/logo.png" alt="Bootsshop"></a>
 		<form class="form-inline navbar-search" method="post" action="products.html">
 		<input id="srchFld" class="srchTxt" type="text">
-		  <select class="srchTxt">
+		  <select class="srchTxt" style="visibility: visible;">
 			<option>All</option>
 			<option>CLOTHES </option>
 			<option>FOOD AND BEVERAGES </option>
@@ -104,8 +202,8 @@
     </ul>	
 	<div class="row">	  
 			<div id="gallery" class="span3">
-            <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="themes/images/products/large/3.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera">
+            <a href="themes/images/products/table1.png" title="Table Fuongip 1">
+				<img src="themes/images/products/table1.png" style="width:100%" alt="table1">
             </a>
 			<div id="differentview" class="moreOptopm carousel slide">
                 <div class="carousel-inner">
@@ -138,55 +236,50 @@
 			</div>
 			</div>
 			<div class="span6">
-				<h3>Fujifilm FinePix S2950 Digital Camera  </h3>
-				<small>- (14MP, 18x Optical Zoom) 3-inch LCD</small>
+				<h3>Table Fuongip 1&nbsp;</h3>
+				
 				<hr class="soft">
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>$222.00</span></label>
+					<label class="control-label"><span id="price">300€</span></label>
 					<div class="controls">
-					<input type="number" class="span1" placeholder="Qty.">
-					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					  <button type="submit" class="btn btn-large btn-primary pull-right">Ajouter au panier&nbsp;<i class=" icon-shopping-cart"></i></button>
 					</div>
 				  </div>
 				</form>
+				
+				
+				
+				<table class="table">
+							<tr>
+								<td>Dimensions :</td>
+								<td> <-- </td>
+								<td id="dims"> Par défaut </td>
+								<td> --> </td>
+							</tr>
+							<tr>
+								<td>Couleur : </td>
+								<td> <-- </td>
+								<td id="couleurs"> Par défaut </td>
+								<td> --> </td>
+							</tr>
+							<tr>
+								<td>Bois : </td>
+								<td> <-- </td>
+								<td id="bois"> Par défaut </td>
+								<td> --> </td>
+							</tr>
+						</table>
+
+				
+				
 				
 				<hr class="soft">
-				<h4>100 items in stock</h4>
-				<form class="form-horizontal qtyFrm pull-right">
-				  <div class="control-group">
-					<label class="control-label"><span>Color</span></label>
-					<div class="controls">
-					  <select class="span2">
-						  <option>Black</option>
-						  <option>Red</option>
-						  <option>Blue</option>
-						  <option>Brown</option>
-						</select>
-					</div>
-				  </div>
-				</form>
-				<hr class="soft clr">
-				<p>
-				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. 
-				Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. 
-				Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).
+				<h4>10 produits en stock</h4>
 				
-				</p>
-				<a class="btn btn-small pull-right" href="#detail">More Details</a>
-				<br class="clr">
-			<a href="#" name="detail"></a>
-			<hr class="soft">
-			</div>
-			
-			<div class="span9">
-            <ul id="productDetail" class="nav nav-tabs">
-              <li class=""><a href="#home" data-toggle="tab">Product Details</a></li>
-              <li class="active"><a href="#profile" data-toggle="tab">Related Products</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade" id="home">
-			  <h4>Product Information</h4>
+				<hr class="soft clr">
+				
+				<h4>Product Information</h4>
                 <table class="table table-bordered">
 				<tbody>
 				<tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
@@ -197,306 +290,25 @@
 				<tr class="techSpecRow"><td class="techSpecTD1">Display size:</td><td class="techSpecTD2">3</td></tr>
 				</tbody>
 				</table>
-				
-				<h5>Features</h5>
-				<p>
-				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>
-				OND363338
-				</p>
-
-				<h4>Editorial Reviews</h4>
-				<h5>Manufacturer's Description </h5>
-				<p>
-				With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0" LCD screen and 720p HD (30fps) movie capture.
-				</p>
-
-				<h5>Electric powered Fujinon 18x zoom lens</h5>
-				<p>
-				The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you're at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.
-				</p>
-				<h5>Impressive panoramas</h5>
-				<p>
-				With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It's so easy and the results are impressive.
-				</p>
-
-				<h5>Sharp, clear shots</h5>
-				<p>
-				Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm's Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.
-				</p>
-              </div>
-		<div class="tab-pane fade active in" id="profile">
-		<div id="myTab" class="pull-right">
-		 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-		 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-		</div>
-		<br class="clr">
-		<hr class="soft">
-		<div class="tab-content">
-			<div class="tab-pane" id="listView">
-				<div class="row">	  
-					<div class="span2">
-						<img src="themes/images/products/4.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-					<h3> $222.00</h3>
-					<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-					</label><br>
-					<div class="btn-group">
-					  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-					  <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-					 </div>
-						</form>
-					</div>
-			</div>
+				<br class="clr">
+			<a href="#" name="detail"></a>
 			<hr class="soft">
-			<div class="row">	  
-					<div class="span2">
-						<img src="themes/images/products/5.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br>
-						<div class="btn-group">
-						<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-					</form>
-					</div>
-			</div>
-			<hr class="soft">
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/6.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-					<form class="form-horizontal qtyFrm">
-					<h3> $222.00</h3>
-					<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-					</label><br>
-				<div class="btn-group">
-				  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				  <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				 </div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft">
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/7.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br>
-						<div class="btn-group">
-						<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
 			</div>
 			
-			<hr class="soft">
-			<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/8.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br>
-						<div class="btn-group">
-						<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft">
-				<div class="row">	  
-					<div class="span2">
-					<img src="themes/images/products/9.jpg" alt="">
-					</div>
-					<div class="span4">
-						<h3>New | Available</h3>				
-						<hr class="soft">
-						<h5>Product Name </h5>
-						<p>
-						Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - 
-						that is why our goods are so popular..
-						</p>
-						<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-						<br class="clr">
-					</div>
-					<div class="span3 alignR">
-						<form class="form-horizontal qtyFrm">
-						<h3> $222.00</h3>
-						<label class="checkbox">
-						<input type="checkbox">  Adds product to compair
-						</label><br>
-						<div class="btn-group">
-						<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-						<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-						</div>
-						</form>
-					</div>
-			</div>
-			<hr class="soft">
-		</div>
-			<div class="tab-pane active" id="blockView">
-				<ul class="thumbnails">
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/10.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/11.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/12.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/13.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/1.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-					<li class="span3">
-					  <div class="thumbnail">
-						<a href="product_details.html"><img src="themes/images/products/2.jpg" alt=""></a>
-						<div class="caption">
-						  <h5>Manicure &amp; Pedicure</h5>
-						  <p> 
-							Lorem Ipsum is simply dummy text. 
-						  </p>
-						   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
-						</div>
-					  </div>
-					</li>
-				  </ul>
-			<hr class="soft">
-			</div>
-		</div>
-				<br class="clr">
-					 </div>
-		</div>
-          </div>
-
+	
 	</div>
 </div>
 </div> </div>
 </div>
 <!-- MainBody End ============================= -->
+
+
+
+
+
+
+
+
 <!-- Footer ================================================================== -->
 	<div id="footerSection">
 	<div class="container">
