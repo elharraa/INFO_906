@@ -57,6 +57,7 @@ document.onkeydown = function (event)
   		-- PT_DIMS;
   		PRIX -= 50;
   		document.getElementById("dims").innerHTML = dims[PT_DIMS];
+  		
   	}
   	else if ( FOCUS == 1 && PT_COULEURS > 0 )
   	{
@@ -101,14 +102,47 @@ document.onkeydown = function (event)
    else if (code == 186 && FOCUS > 0)
   {
   	-- FOCUS;
+  	if(FOCUS == 1)
+  		{
+  			document.getElementById("couleurs").style.background ="gainsboro";
+  			document.getElementById("dims").style.background ="transparent";
+  			document.getElementById("bois").style.background ="transparent";
+
+
+  		}
+  	else if(FOCUS == 0)
+  		{
+  			document.getElementById("couleurs").style.background ="transparent";
+  			document.getElementById("dims").style.background ="gainsboro";
+  			document.getElementById("bois").style.background ="transparent";
+
+
+  		}
   }
    else if (code == 83 && FOCUS < 2)
   {
   	++ FOCUS;
+  	if(FOCUS == 1)
+  		{
+  			document.getElementById("couleurs").style.background ="gainsboro";
+  			document.getElementById("dims").style.background ="transparent";
+  			document.getElementById("bois").style.background ="transparent";
+
+
+  		}
+  	else if(FOCUS == 2)
+  		{
+  			document.getElementById("couleurs").style.background ="transparent";
+  			document.getElementById("dims").style.background ="transparent";
+  			document.getElementById("bois").style.background ="gainsboro";
+
+
+  		}
+  		
   }
-  else if (code == 32)
+  else if (code == 82)
   {
-  	
+		alert("Votre commande a été envoyée. Merci de le présenter à la caisse pour le règlement et donner l'adresse de livraison.");
   }
   document.getElementById("price").innerHTML = PRIX + "€";
   //console.log(code);
@@ -119,11 +153,17 @@ document.onkeydown = function (event)
   }*/
  
 };
+document.ready = function(event)
+{
+	document.getElementById("dims").style.background ="gainsboro";
+};
 /*document.onclick = function (event)
 {
   alert("Votre commande a été envoyée. Merci de le présenter à la caisse pour le règlement et donner l'adresse de livraison.");
 };*/
 </script>
+
+
 	
 	
   </head>
@@ -132,59 +172,7 @@ document.onkeydown = function (event)
 <div class="container">
 
 <!-- Navbar ================================================== -->
-<div id="logoArea" class="navbar">
-<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-</a>
-  <div class="navbar-inner">
-    <a class="brand" href="index.html"><img src="themes/images/logo.png" alt="Bootsshop"></a>
-		<form class="form-inline navbar-search" method="post" action="products.html">
-		<input id="srchFld" class="srchTxt" type="text">
-		  <select class="srchTxt" style="visibility: visible;">
-			<option>All</option>
-			<option>CLOTHES </option>
-			<option>FOOD AND BEVERAGES </option>
-			<option>HEALTH &amp; BEAUTY </option>
-			<option>SPORTS &amp; LEISURE </option>
-			<option>BOOKS &amp; ENTERTAINMENTS </option>
-		</select> 
-		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-    </form>
-    <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="special_offer.html">Specials Offer</a></li>
-	 <li class=""><a href="normal.html">Delivery</a></li>
-	 <li class=""><a href="contact.html">Contact</a></li>
-	 <li class="">
-	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Login Block</h3>
-		  </div>
-		  <div class="modal-body">
-			<form class="form-horizontal loginFrm">
-			  <div class="control-group">								
-				<input type="text" id="inputEmail" placeholder="Email">
-			  </div>
-			  <div class="control-group">
-				<input type="password" id="inputPassword" placeholder="Password">
-			  </div>
-			  <div class="control-group">
-				<label class="checkbox">
-				<input type="checkbox"> Remember me
-				</label>
-			  </div>
-			</form>		
-			<button type="submit" class="btn btn-success">Sign in</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
-	</div>
-	</li>
-    </ul>
-  </div>
-</div>
+   
 </div>
 </div>
 <!-- Header End====================================================================== -->
@@ -205,35 +193,9 @@ document.onkeydown = function (event)
             <a href="themes/images/products/table1.png" title="Table Fuongip 1">
 				<img src="themes/images/products/table1.png" style="width:100%" alt="table1">
             </a>
-			<div id="differentview" class="moreOptopm carousel slide">
-                <div class="carousel-inner">
-                  <div class="item active">
-                   <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""></a>
-                   <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""></a>
-                   <a href="themes/images/products/large/f3.jpg"> <img style="width:29%" src="themes/images/products/large/f3.jpg" alt=""></a>
-                  </div>
-                  <div class="item">
-                   <a href="themes/images/products/large/f3.jpg"> <img style="width:29%" src="themes/images/products/large/f3.jpg" alt=""></a>
-                   <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""></a>
-                   <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""></a>
-                  </div>
-                </div>
-              <!--  
-			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-              <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a> 
-			  -->
-              </div>
+			
 			  
-			 <div class="btn-toolbar">
-			  <div class="btn-group">
-				<span class="btn"><i class="icon-envelope"></i></span>
-				<span class="btn"><i class="icon-print"></i></span>
-				<span class="btn"><i class="icon-zoom-in"></i></span>
-				<span class="btn"><i class="icon-star"></i></span>
-				<span class="btn"><i class=" icon-thumbs-up"></i></span>
-				<span class="btn"><i class="icon-thumbs-down"></i></span>
-			  </div>
-			</div>
+			 
 			</div>
 			<div class="span6">
 				<h3>Table Fuongip 1&nbsp;</h3>
@@ -243,14 +205,14 @@ document.onkeydown = function (event)
 				  <div class="control-group">
 					<label class="control-label"><span id="price">300€</span></label>
 					<div class="controls">
-					  <button type="submit" class="btn btn-large btn-primary pull-right">Ajouter au panier&nbsp;<i class=" icon-shopping-cart"></i></button>
+					  <button type="submit" class="btn btn-large btn-success pull-right">Lancer commande&nbsp;<i class=" icon-shopping-cart"></i></button>
 					</div>
 				  </div>
 				</form>
 				
 				
 				
-				<table class="table">
+				<table id="table" class="table">
 							<tr>
 								<td>Dimensions :</td>
 								<td> <-- </td>
@@ -279,15 +241,13 @@ document.onkeydown = function (event)
 				
 				<hr class="soft clr">
 				
-				<h4>Product Information</h4>
+				<h4>Informations produit</h4>
                 <table class="table table-bordered">
 				<tbody>
-				<tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Brand: </td><td class="techSpecTD2">Fujifilm</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Model:</td><td class="techSpecTD2">FinePix S2950HD</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Released on:</td><td class="techSpecTD2"> 2011-01-28</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Dimensions:</td><td class="techSpecTD2"> 5.50" h x 5.50" w x 2.00" l, .75 pounds</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Display size:</td><td class="techSpecTD2">3</td></tr>
+				<tr class="techSpecRow"><th colspan="2">Details</th></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Marque: </td><td class="techSpecTD2">Fuongip</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Modèle:</td><td class="techSpecTD2">Fuongip1</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Dimensions:</td><td class="techSpecTD2"> 5.50" h x 5.50" w x 2.00" l, .75 kg</td></tr>
 				</tbody>
 				</table>
 				<br class="clr">
